@@ -22,6 +22,11 @@
   link(href)[#text(fill: blue)[#underline[#content]]]
 }
 
+// #show: touying-set-config.with(config-colors(
+//   primary: black,
+// ))
+#show strong: set text(weight: "bold")
+
 #title-slide()
 
 == 発表の目的
@@ -287,7 +292,7 @@
           spacing: 0.5em,
           fletcher-diagram(
             node-stroke: .075em,
-            node((0, 0), text(fill: color)[$a$], name: <v1>, width: 1.5em, height: 1.5em, shape: circle, stroke: color)
+            node((0, 0), text(fill: color)[$v'$], name: <v1>, width: 1.5em, height: 1.5em, shape: circle, stroke: color)
           ),
           line(length: 2em, stroke: color)
         )
@@ -330,7 +335,7 @@
   main-diagram(visited: (true, true), stack: ((3, true), (2, false),)),
   main-diagram(visited: (true, true, false, true), stack: ((2, false),)),
   main-diagram(visited: (true, true, false, true), stack: ((2, true),)),
-  main-diagram(visited: (true, true, false, true), stack: ()),
+  main-diagram(visited: (true, true, true, true), stack: ()),
   main-diagram(visited: (true, true, true, true), stack: ((3, false),)),
   main-diagram(visited: (true, true, true, true), stack: ((3, true),)),
   main-diagram(visited: (true, true, true, true), stack: ()),
@@ -371,8 +376,8 @@
 
 #main-diagram(visited: (true, true, true, true), stack: ())
 
-- *不変条件*: 探索済みの頂点から*N*ステップ先の頂点は既に探索済み
-  - つまり、始点から到達可能な頂点は探索済み
+- *不変条件*: 探索済みの頂点から1ステップ先の頂点は既に探索済み#text(fill: gray)[orスタック上]
+  - よって、Nステップ先の頂点(= 到達可能な頂点)は全て探索済み
 - 逆に、別の不変条件を使うと到達可能な頂点だけ探索することが分かる
 - したがって、到達可能性を計算するにはDFSでグラフを探索すればよい 🎉
   - *よい不変条件がDFSの正しさを導いた*
@@ -391,6 +396,7 @@
 
 - 定理証明の苦しみを軽減する
   - 問題を分割することで一度に扱う複雑さを低減する
+    - 証明の一部分を補題として切り出して再利用する
   - コードを再利用してボイラープレートを減らす
     - 定理証明パターンがありそう
     - 例: #styledLink("https://zenn.dev/pandaman64/articles/lean-proof-data-ja")[ProofDataで中間的な定義や証明を整理する]
@@ -407,7 +413,7 @@
 - メリット:
   - 型の表現力が上がる
   - パフォーマンス向上
-    - ```lean def Array.get : (xs : Array α) → Fin xs.size : α```は境界チェックしない
+    - ```lean def Array.get : (xs : Array α) → Fin xs.size → α```は境界チェックしない
 - デメリット:
   - 型チェックが複雑になる（値の等しさもチェックしないといけないため）
     - 明示的なキャストが必要な場合はコードが冗長になる
@@ -423,16 +429,16 @@
   - #emoji.person.no 型に登場する値が変わるとき（キャストが必要なとき）
 - 値と一緒に命題を渡すほうが問題が起きないがち
   - #emoji.quest ```lean def Array.get : (xs : Array α) → (i : Fin xs.size) : α```
-  - #emoji.thumb ```lean def Array.get : (xs : Array α) → (i : Nat) → (lt : i < xs.size) : α```
+  - #emoji.thumb ```lean def Array.get' : (xs : Array α) → (i : Nat) → (lt : i < xs.size) : α```
   - `i`が単なる自然数なのでキャストの問題が起きない
 
 == まとめ
 
-- Leanは定理証明支援系であり純粋関数プログラミング言語でもある
+- Leanは純粋関数プログラミング言語であり定理証明支援系でもある
   - Leanで記述したプログラムの性質をLean内で証明できる
 - Leanで正規表現ライブラリ`lean-regex`を作っている
-  - しかも、`lean-regex`の正しさをLeanで検証した
-- 定理証明には対象のプログラムの深い理解が必要
+  - しかも、`lean-regex`の正しさをLeanの定理として証明した
+- プログラムの性質の証明は対象のプログラムの深い理解をもたらす
   - 定理証明は苦しいが、とってもやりがいがある
 - *みんなも定理証明、やろう！*
 
@@ -441,6 +447,7 @@
 - #styledLink("https://adam.math.hhu.de/#/")[Natural Numbers Game]: Leanの楽しいチュートリアル
 - #styledLink("https://lean-lang.org/functional_programming_in_lean/")[Functional Programming in Lean]: Leanでのプログラムの書き方と検証
 - #styledLink("https://leanprover-community.github.io/mathematics_in_lean/index.html")[Mathematics in Lean]: Leanで数学を表現する方法 (Mathlibの紹介)
+- #styledLink("https://leanprover.zulipchat.com/")[Lean Zulip]: 親切なコミュニティ
 
 == おわり
 
