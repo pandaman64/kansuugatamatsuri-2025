@@ -15,6 +15,7 @@
     subtitle: text(size: 1em)[そして正しさを証明する],
     author: [井山梃子歴史館 (pandaman64)],
     date: datetime(year: 2025, month: 6, day: 15),
+    logo: image("icon.jpg", width: 64pt, height: 64pt),
   ),
 )
 
@@ -28,6 +29,8 @@
 #show strong: set text(weight: "bold")
 
 #title-slide()
+
+#show: metropolis-theme.with(config-info(logo: none))
 
 == 発表の目的
 
