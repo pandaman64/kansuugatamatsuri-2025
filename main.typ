@@ -12,7 +12,7 @@
   aspect-ratio: "16-9",
   config-info(
     title: [Leanで正規表現エンジンをつくる],
-    subtitle: [そして正しさを証明する],
+    subtitle: text(size: 1em)[そして正しさを証明する],
     author: [井山梃子歴史館 (pandaman64)],
     date: datetime(year: 2025, month: 6, day: 15),
   ),
@@ -35,8 +35,11 @@
   - Leanとは？
   - なぜLeanで定理を証明するのか？
   - プログラムの正しさを証明するとは？
+    - デモ
 - 仲間を探しに来た
   - みんなも定理証明、やろう！
+  - #text(size: 1.75em)[みんなも定理証明、やろう！]
+  - #text(size: 2.5em)[みんなも定理証明、やろう！]
   - #text(size: 0.75em)[（あわよくば）]#styledLink("https://github.com/pandaman64/lean-regex")[lean-regex]にコントリビュート、しよう！
   
 = Leanとは？
@@ -106,7 +109,7 @@
 
 - #styledLink("https://github.com/pandaman64/lean-regex")[lean-regex]: 自作の正規表現ライブラリ
   - 正規表現をオートマトンにコンパイルして実行
-  - Lean上で実装の正しいことを検証済み
+  - Lean上で実装が正しいことを検証した
 - 「実装が正しい」とは？
   - 正規表現のマッチ結果を厳密に定義する
     - ```lean inductive Captures : Iterator → Iterator → CaptureGroups → Expr → Prop ```
@@ -145,7 +148,7 @@
 == なぜ定理証明するのか？
 
 - 定理証明は苦しい...
-  - 証明のコード量は実装の2〜20倍
+  - 証明のコード量は実装の2〜10倍
   - 定理証明支援系のご機嫌取りでボイラープレートが増える
     - #image("never_theorem_prover.png", width: 450pt)
 - それでもなぜやるのか？
