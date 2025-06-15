@@ -15,7 +15,7 @@
     subtitle: text(size: 1em)[そして正しさを証明する],
     author: [井山梃子歴史館 (pandaman64)],
     date: datetime(year: 2025, month: 6, day: 15),
-    logo: image("icon.jpg", width: 64pt, height: 64pt),
+    // logo: image("icon.jpg", width: 64pt, height: 64pt),
   ),
 )
 
@@ -30,7 +30,16 @@
 
 #title-slide()
 
-#show: metropolis-theme.with(config-info(logo: none))
+// #show: metropolis-theme.with(
+//   aspect-ratio: "16-9",
+//   config-info(
+//     title: [Leanで正規表現エンジンをつくる],
+//     subtitle: text(size: 1em)[そして正しさを証明する],
+//     author: [井山梃子歴史館 (pandaman64)],
+//     date: datetime(year: 2025, month: 6, day: 15),
+//     // logo: image("icon.jpg", width: 64pt, height: 64pt),
+//   ),
+// )
 
 == 発表の目的
 
@@ -114,7 +123,7 @@
   - 正規表現をオートマトンにコンパイルして実行
   - Lean上で実装が正しいことを検証した
 - 「実装が正しい」とは？
-  - 正規表現のマッチ結果を厳密に定義する
+  - 正規表現マッチの仕様を厳密に定義し、それに合致することを示す
     - ```lean inductive Captures : Iterator → Iterator → CaptureGroups → Expr → Prop ```
   - 検索関数```lean def Regex.find : Iterator → Regex → Option CaptureGroups ```について
     - ✅ #styledLink("https://github.com/pandaman64/lean-regex/blob/a78f86844b4878421b0b9181c095f449f61c0720/correctness/RegexCorrectness/Regex/Basic.lean#L72")[健全性]: 見つかったマッチは`Captures`を必ず満たす
@@ -393,6 +402,7 @@
 - 定理証明はたいへん苦しい
 - 定理証明は定理の*深い理解*をもたらす
   - プログラムの深い理解 = *よい不変条件*を見つけること
+  - （形式的には、不変条件を使って帰納法の仮定を強めている）
 - 定理証明はとても*やりがいがある*
   - 全てが繋がった瞬間の気持ちよさはとんでもない
 
@@ -446,9 +456,10 @@
   - しかも、`lean-regex`の正しさをLeanの定理として証明した
 - プログラムの性質の証明は対象のプログラムの深い理解をもたらす
   - 定理証明は苦しいが、とってもやりがいがある
+  - 苦しみもエンジニアリング力で立ち向かうぞ💪
 - *みんなも定理証明、やろう！*
 
-== 定理証明がやりたくなったら
+== (Leanで)定理証明がやりたくなったら
 
 - #styledLink("https://adam.math.hhu.de/#/")[Natural Numbers Game]: Leanの楽しいチュートリアル
 - #styledLink("https://lean-lang.org/functional_programming_in_lean/")[Functional Programming in Lean]: Leanでのプログラムの書き方と検証
@@ -460,5 +471,18 @@
 #align(center)[
   #text(size: 3em)[みんなも定理証明、やろう！]
 
-  #styledLink("https://github.com/pandaman64/lean-regex")[lean-regex]はいつでもコントリビュータ募集中！
+  #text(size: 1.5em)[
+    #styledLink("https://github.com/pandaman64/lean-regex")[lean-regex]はいつでもコントリビュータ募集中！
+  ]
+  
+
+  #box(stroke: .05em + gray, inset: 10pt)[
+    #align(left)[
+      話せなかった話題
+  
+      - LLM/強化学習の定理証明への応用
+      - 形式手法を実用するなら？
+      - どのような数学がLeanで形式化されている？ご利益は？
+    ]
+  ]
 ]
